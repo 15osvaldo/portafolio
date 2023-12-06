@@ -1,153 +1,459 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <!-- MENU ENCABEZADO -->
+    <div class="contenedor-header">
+        <header>
+            <div class="logo">
+                <a href="#">JOSUÉ GONZALEZ</a>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#inicio" onclick="seleccionar()">INICIO</a></li>
+                    <li><a href="#sobremi" onclick="seleccionar()">SOBRE MI</a></li>
+                    <li><a href="#skills" onclick="seleccionar()">SKILLS</a></li>
+                    <li><a href="#curriculum" onclick="seleccionar()">CURRICULUM</a></li>
+                    <li><a href="#portfolio" onclick="seleccionar()">PORTFOLIO</a></li>
+                    <li><a href="#contacto" onclick="seleccionar()">CONTACTO</a></li>
+                </ul>
+            </nav>
+            <div class="nav-responsive" onclick="mostrarOcultarMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </header>
+    </div>
 
-<html>
-	<head>
-		<title>Portafolio Josué González</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+    <!-- SECCION INICIO -->
+    <section id="inicio" class="inicio">
+        <div class="contenido-banner">
+            <div class="contenedor-img">
+                <img src="img/hero.jpg" alt="">
+            </div>
+            <h1>JOSUÉ GONZALEZ</h1>
+            <h2>DESARROLLADOR </h2>
+            <div class="redes">
+                <!-- 
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a> 
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-skype"></i></a>-->
+                <a href="https://gt.linkedin.com/in/josu%C3%A9-osvaldo-gonz%C3%A1lez-salazar-5682091a2"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/15osvaldo"><i class="fab fa-git"></i></a>
+            </div>
+        </div>
+    </section>
 
-		<!-- Sidebar -->
-			<section id="sidebar">
-				<div class="inner">
-					<nav>
-						<ul>
-							<li><a href="#intro">¿Quien Soy?</a></li>
-							<li><a href="#one">Mis Proyectos</a></li>
-							<!--<li><a href="#two">¿Por qué contratarme?</a></li>-->
-							<li><a href="#three">contacto</a></li>
-						</ul>
-					</nav>
-				</div>
-			</section>
+    <!-- SECCION SOBRE MI -->
+    <section id="sobremi" class="sobremi">
+        <div class="contenido-seccion">
+            <h2>Sobre Mí</h2>
+            <p><span>Hola soy Josué.</span>Me dedico a desarrolloar en tecnologias web como HTML, Javascript Y CSS, soy un apacionado de la tecnologia y cada dia aprendo nuevas cosas sobre desarrollo web.</p>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+            <div class="fila">
+                <!-- datos personales -->
+                <div class="col">
+                    <h3>Datos Personales</h3>
+                    <ul>
+                        <!-- 
+                        <li>
+                            <strong>Cumpleaños</strong>
+                            15-01-1993
+                        </li>
+                        -->
+                        <li>
+                            <strong>Teléfono</strong>
+                            +502 46710346
+                        </li>
+                        <li>
+                            <strong>Email</strong>
+                            valdosalazar@gmail.com
+                        </li>
+                        <!-- 
+                        <li>
+                            <strong>Website</strong>
+                            www.example.com
+                        </li>
+                        <li>
+                            <strong>Dirección</strong>
+                            123 San Luis, Argentina
+                        </li>
+                        <li>
+                            <strong>Cargo</strong>
+                            <span>FREELANCE</span>
+                        </li>
+                        -->
+                    </ul>
+                </div>
 
-				<!-- Intro -->
-					<section id="intro" class="wrapper style1 fullscreen fade-up">
-						<div class="inner">
-							<h1>Hola soy Josué, un <span style="color: #ffa4de"> Javascript Developer lleno de pasión</span></h1>
-							<p>Me dedico a desarrolloar en tecnologias web como HTML, Javascript Y CSS,<br />
-							soy un apacionado de la tecnologia y cada dia aprendo nuevas cosas sobre desarrollo web.</p>
-							<ul class="actions">
-								<li><a href="#one" class="button scrolly">Ver más</a></li>
-							</ul>
-						</div>
-					</section>
+                <!-- intereses -->
+                <div class="col">
+                    <h3>Intereses</h3>
+                    <div class="contenedor-intereses">
+                        
+                        <div class="interes">
+                            <i class="fa-solid fa-headphones"></i>
+                            <span>MUSICA</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-solid fa-plane"></i>
+                            <span>VIAJAR</span>
+                        </div>
+                        <!-- 
+                            <div class="interes">
+                            <i class="fa-solid fa-gamepad"></i>
+                            <span>JUEGOS</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-brands fa-apple"></i>
+                            <span>MAC OS</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>FOTOS</span>
+                        </div>
+                        -->
+                        <div class="interes">
+                            <i class="fa-solid fa-person-hiking"></i>
+                            <span>DEPORTE</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-solid fa-book"></i>
+                            <span>LIBROS</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-solid fa-car"></i>
+                            <span>AUTOS</span>
+                        </div>
+                        <div class="interes">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>FOTOS</span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <button>
+                <i class="fa-solid fa-download" ></i>
+                <a href="Josue_González.pdf" download style="text-decoration: none; color: white;">Descargar CV</a>
+                <span class="overlay"></span>
+            </button>
+        </div>
+    </section>
 
-				<!-- One -->
-					<section id="one" class="wrapper style2 spotlights">
-						<section>
-							<a href="#" class="image"><img src="todolist.PNG" alt="" data-position="center center" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>ToDOList con Javascript, CSS y HTML</h2>
-									<p>La función principal de este proyecto es poder crear listas de tareas por hacer en donde se pueden ir marcando las tareas ya realizadas o bien se tiene la opción de eliminar cada tarea ya realizada.</p>
-									<br>
-									<p></p>
-									<ul class="actions">
-										<li><a href="https://15osvaldo.github.io/todo/" class="button">Ver proyecto</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<a href="#" class="image"><img src="calculadora_javascript.PNG" alt="" data-position="top center" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>Calculadora Basica usando Javascript, CSS y HTML</h2>
-									<p>La función principal de este proyecto es poder simular una culculadora y poder realizar cualquier operación basica.</p>
-									<ul class="actions">
-										<li><a href="https://15osvaldo.github.io/CalculadoraHtml-Css-Js/" class="button">Ver proyecto</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<a href="#" class="image"><img src="Calcualdora_Csharp.PNG" alt="" data-position="top center" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>Calculadora Basica en C# </h2>
-									<p>La funcion de este proyecto es poder usar una culculadora basica hecha en Scharp que es especialmente para escritorio.</p>
-									<ul class="actions">
-										<li><a href="https://github.com/15osvaldo/CalculadoraCsharp.git" class="button">Ir a repositorio</a></li>
-									</ul>
-								</div>
-							</div>
-						</section><section>
-						<a href="#" class="image"><img src="juego.PNG" alt="" data-position="top center" /></a>
-						<div class="content">
-							<div class="inner">
-								<h2>Juego usando Javascript, CSS y HTML</h2>
-								<p>La función principal de este proyecto es poder mover una nave protagonista y varias naves enemigas con la ayuda de Javascript,
-									 estas se pueden disparar entre si, al momento de recibir un disparo se eliminar la nave.</p>
-								<ul class="actions">
-									<li><a href=" https://15osvaldo.github.io/juego/" class="button">Ver proyecto</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
-					</section>
-					
+    <!-- SECCION SKILLS -->
+    <section class="skills" id="skills">
+        <div class="contenido-seccion">
+            <h2>Skills</h2>
+            <div class="fila">
+                <!-- Technical Skill -->
+                <div class="col">
+                    <h3>Technical Skills</h3>
+                    <div class="skill">
+                        <span>Javascript</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>75%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>HTML & CSS</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>89%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>C#</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>75%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Css</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>81%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Sql server</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>65%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>MySql</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>65%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Professional Skills -->
+                <div class="col">
+                    <h3>Professional Skills</h3>
+                    <div class="skill">
+                        <span>Comunicación</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>80%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Trabajo en Equipo</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>70%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Creatividad</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>99%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Dedicación</span>
+                        <div class="barra-skill">
+                            <div class="progreso">
+                                <span>65%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Scrum</span>
+                        <div class="barra-skill">
+                            <div class="progreso  proyect">
+                                <span>74%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contenido-seccion sobremi1">
+                        <button>
+                            <i class="fa-solid fa-search" ></i> 
+                            <a href="https://15osvaldo.github.io/todo"  style="text-decoration: none; color: white; ">Ver certificados!!!</a>
+                            <span class="overlay"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-				
+    <!-- SECCION CURRICULUM -->
+    <section id="curriculum" class="curriculum">
+        <div class="contenido-seccion">
+            <h2>Curriculum</h2>
+            <div class="fila">
+                <div class="col izquierda">
+                    <h3>Educación</h3>
+                    <div class="item izq">
+                        <h4>Ingeniería en sistemas y ciencias de la computación</h4>
+                        <span class="casa">Universidad Mariano Gálvez de Guatemala</span>
+                        <span class="fecha">2017 - Actual</span>
+                        <p>Soy estudiante de octavo semestre de ingeniería en sistemas de información de la universidad Mariano Gálvez de Guatemala, una carrera que me forma para crear y administrar soluciones informáticas que optimicen el funcionamiento de las organizaciones.</p>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>
+                    <div class="item izq">
+                        <h4>Bachillerato con orientacion tecnica en electricidad y soldadura</h4>
+                        <span class="casa">Escuela experimental ocupacional "Villa de los Niños"</span>
+                        <span class="fecha">2010 - 2011</span>
+                        <p>Soy Bachiller Técnico en Electricidad y Soldadura por la Villa de los Niños, una institución educativa que forma parte de la obra social de las Hermanas de María. Tengo conocimientos y habilidades en los fundamentos de la electricidad, la electrónica y la automatización, así como en los procesos de soldadura por arco y oxigás. Puedo realizar instalaciones, reparaciones y mantenimientos eléctricos y de estructuras metálicas, siguiendo las normas de seguridad y calidad.</p>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>
+                    <!-- 
+                    <div class="item izq">
+                        <h4>Arte y Multimedia</h4>
+                        <span class="casa">Universidad de Oxford</span>
+                        <span class="fecha">2005 - 2008</span>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, cumque repellat, tempora recusandae aliquam nemo esse natus impedit, nostrum temporibus veritatis eaque soluta aperiam id repudiandae fugiat deserunt! Explicabo, veritatis?</p>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>-->
+                </div>
 
-				<!-- Three -->
-					<section id="three" class="wrapper style1 fade-up">
-						<div class="inner">
-							<h2>Informacion de contacto</h2>
-						
-							<div class="split style1">
-								
-								<section>
-									<ul class="contact">
-										
-										<li>
-											<h3>Email</h3>
-											<a href="#">valdosalazar@gmail.com</a>
-										</li>
-										<li>
-											<h3>Telefono</h3>
-											<span>(502) 4671-0346</span>
-										</li>
-										<li>
-											<h3>Social</h3>
-											<ul class="icons">
-												
-												<li><a href="https://github.com/15osvaldo" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-												
-												<li><a href="https://gt.linkedin.com/in/josu%C3%A9-osvaldo-gonz%C3%A1lez-salazar-5682091a2" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-											</ul>
-										</li>
-									</ul>
-								</section>
-							</div>
-						</div>
-					</section>
+                <div class="col derecha">
+                    <h3>Experiencia de trabajo</h3>
+                    <div class="item der">
+                        <h4>Desarrollador Junior</h4>
+                        <span class="casa">DATALOGICS</span>
+                        <span class="fecha">2022 - Actual</span>
+                        <p>Soy desarrollador junior de software en DATALOGICS system, una empresa que brinda soluciones tecnológicas innovadoras y personalizadas. Actualmente, estoy asignado como outsourcing al banco G&T, una de las instituciones financieras más importantes de Guatemala, donde apoyo el desarrollo y mantenimiento de sus aplicaciones informáticas.</p>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                    <div class="item der">
+                        <h4>Encargado de laboratorio de control de calidad</h4>
+                        <span class="casa">Tecnología textil avanzada</span>
+                        <span class="fecha">2011 - 2022</span>
+                        <p>Fui Encargado de laboratorio de control de calidad en Tecnología Textil Avanzada, una empresa que brinda soluciones ecológicas e innovadoras en el sector textil. Mi función era supervisar y garantizar la calidad de los productos elaborados a partir de botellas de plástico PET recicladas, siguiendo los estándares y normas establecidos. También me encargaba de coordinar y capacitar al personal del laboratorio, así como de recibir y aplicar las recomendaciones de los asesores técnicos.</p>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                    <!-- 
+                    <div class="item der">
+                        <h4>Front Developer</h4>
+                        <span class="casa">Nombre de Compañía</span>
+                        <span class="fecha">2005 - 2008</span>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, cumque repellat, tempora recusandae aliquam nemo esse natus impedit, nostrum temporibus veritatis eaque soluta aperiam id repudiandae fugiat deserunt! Explicabo, veritatis?</p>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
 
-			</div>
+    <!-- SECCION PORTFOLIO -->
+    <section id="portfolio" class="portfolio">
+        <div class="contenido-seccion">
+            <h2>PORTFOLIO</h2>
+            <div class="galeria">
+                <div class="proyecto">
+                    <a href="https://15osvaldo.github.io/todo"> <img src="img/Cal.jpg" alt="">
+                    <div class="overlay">
+                        <h3>ToDO List</h3>
+                        <p>Realizado con Javascript, CSS y HTML</p>
+                    </div></a>
+                </div>
+                <div class="proyecto calculadora" >
+                    <a href="https://15osvaldo.github.io/CalculadoraHtml-Css-Js">            
+                    <img src="img/Cal1.PNG" alt="">
+                    <div class="overlay">
+                        <h3>Calculadora Basica usando</h3>
+                        <p>La función principal de este proyecto es poder simular una culculadora</p>
+                    </div> </a>
+                </div>
+                <div class="proyecto Juego" >
+                    <a href="https://15osvaldo.github.io/juego/">
+                    <img src="img/ju.PNG" alt="">
+                    <div class="overlay">
+                        <h3>Juego usando Javascript, CSS y HTML</h3>
+                        <p>La función principal de este proyecto es poder mover una nave protagonista y varias naves enemigas</p>
+                    </div></a>
+                </div>
+                <div class="proyecto">
+                    <a href="https://15osvaldo.github.io/memoria_Game">
+                    <img src="img/mem.PNG" alt="">
+                    <div class="overlay">
+                        <h3>MEMORY GAME</h3>
+                        <p>La función principal de este proyecto es buscar todas las figuras pares</p>
+                    </div></a>
+                </div>
+                <div class="proyecto">
+                    <a href="https://github.com/15osvaldo/CalculadoraCsharp.git">
+                    <img src="img/Calcualdora_Csharp.PNG" alt="">
+                    <div class="overlay">
+                        <h3>Calculadora Basica en C#</h3>
+                        <p>  La funcion de este proyecto es poder usar una culculadora basica hecha en Scharp que es especialmente para escritorio.</p>
+                    </div></a>
+                </div> <!--
+                <div class="proyecto">
+                    <img src="img/p6.jpg" alt="">
+                    <div class="overlay">
+                        <h3>Diseño Creativo</h3>
+                        <p>Fotografía</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
 
-		<!-- Footer -->
-			<footer id="footer" class="wrapper style1-alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li>
-					</ul>
-				</div>
-			</footer>
+    <!-- SECCION CONTACTO -->
+    <section id="contacto" class="contacto">
+        <div class="contenido-seccion">
+            <h2>CONTACTO</h2>
+            <div class="fila">
+                <!-- Formulario 
+                <div class="col">
+                    <form action="mailto:[valdosalazar@gmail.com]" method="post" enctype="text/plain"> 
+                        <input type="text" placeholder="Tú Nombre">
+                        <input type="text" placeholder="Número telefónico">
+                        <input type="text" placeholder="Dirección de correo">
+                        <input type="text" placeholder="Tema">
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
+                        <button>
+                            Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
+                            <span class="overlay"></span>
+                        </button>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+                        <input type="text" name="name" placeholder="Nombre">
+                        <input type="text" name="email" placeholder="Correo">
+                        <input type="submit" value="Enviar">
+                    
+                      </form>
+                      
+                   
+                    
+                    
+                    
+                </div>-->
+                <!-- Mapa -->
+                <div class=""><!-- Mapa
+                    <img src="img/ubicacion.png" alt=""> -->
+                    <div class="info">
+                        <ul>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                Guatemala, Ciudad.
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-mobile-screen"></i>
+                                Llamame: +502 - 46710346 
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                Email: valdosalazar@gmail.com
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	</body>
+    <!-- footer -->
+    <footer>
+        <a href="#inicio" class="arriba">
+            <i class="fa-solid fa-angles-up"></i>
+        </a>
+        <div class="redes">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-skype"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-solid fa-rss"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
