@@ -4,466 +4,450 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>JOSUE GONZALEZ</title>
-    <link rel="stylesheet" href="estilo.css">
+    <!-- Se eliminó jQuery porque no se estaba usando (mejora el rendimiento) -->
+    <title>Mis Certificados - Portafolio</title>
+    <style>
+        /* ==============================
+           Variables y Ajustes Básicos
+           ============================== */
+        :root {
+            --bg-main: #0f172a; /* Azul oscuro moderno */
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==============================
+           Layout Principal
+           ============================== */
+        .contenedor-principal {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 2rem auto;
+            gap: 2rem;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        /* --- Panel Izquierdo: Acordeón de Botones --- */
+        .panel-menu {
+            flex: 1 1 350px;
+            background-color: var(--bg-card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .categoria {
+            margin-bottom: 1rem;
+        }
+
+        .categoria-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #27354f;
+            padding: 1rem 1.2rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .categoria-header:hover {
+            background-color: #334155;
+            border-color: var(--text-muted);
+        }
+
+        /* Pequeñas insignias de texto en lugar de imágenes rotas para mantenerlo limpio */
+        .badge {
+            font-size: 0.75rem;
+            background: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Contenido oculto del acordeón */
+        .opciones-lista {
+            display: none; /* Oculto por defecto */
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0.5rem 0.5rem 0.5rem;
+            animation: fadeIn 0.3s ease;
+            
+            /* Ajustes para el Scroll */
+            max-height: 320px; /* Límite de altura */
+            overflow-y: auto;  /* Habilita el scroll vertical si hay muchos elementos */
+            padding-right: 8px; /* Espacio para que el scroll no toque los botones */
+        }
+
+        .opciones-lista.activa {
+            display: flex;
+        }
+
+        /* Diseño del scrollbar personalizado para modo oscuro (WebKit) */
+        .opciones-lista::-webkit-scrollbar {
+            width: 6px;
+        }
+        .opciones-lista::-webkit-scrollbar-track {
+            background: var(--bg-main);
+            border-radius: 10px;
+        }
+        .opciones-lista::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+        .opciones-lista::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .boton-cert {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .boton-cert:hover, .boton-cert.activo {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateX(5px); /* Pequeño efecto de movimiento */
+        }
+
+        .link-credencial {
+            display: inline-block;
+            text-align: center;
+            background-color: transparent;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.4rem;
+            border: 1px dashed #38bdf8;
+            border-radius: 0.4rem;
+            margin-top: -0.2rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .link-credencial:hover {
+            background-color: #38bdf8;
+            color: var(--bg-main);
+        }
+
+        /* --- Panel Derecho: Vista Previa del Certificado --- */
+        .panel-preview {
+            flex: 2 1 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .visor-imagen {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 0.5rem;
+            border: 4px solid var(--border-color);
+            cursor: zoom-in;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            background-color: #000; /* Fondo por si la imagen tarda en cargar */
+        }
+
+        .visor-imagen:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+        }
+
+        .instruccion {
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* ==============================
+           Modal (Zoom de imagen)
+           ============================== */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.mostrar {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 0.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close:hover {
+            color: var(--accent);
+        }
+
+        #caption {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: rgba(0,0,0,0.6);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contenedor-principal {
+                flex-direction: column;
+            }
+            .panel-preview {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- MENU ENCABEZADO -->
-    <div class="contenedor-header">
-        <header>
-            <div class="logo">
-                <a href="#">JOSUÉ GONZALEZ</a>
+
+    <header>
+        <h1>Mis Certificados y Logros</h1>
+    </header>
+
+    <div class="contenedor-principal">
+        
+        <!-- PANEL IZQUIERDO: MENÚ DE NAVEGACIÓN -->
+        <div class="panel-menu">
+            
+            <!-- Sección Udemy -->
+            <div class="categoria">
+                <div class="categoria-header" onclick="toggleSeccion('udemy')">
+                    <span>UDEMY</span>
+                    <span class="badge">11</span>
+                </div>
+                <div id="udemy" class="opciones-lista activa"> <!-- Abierto por defecto -->
+                    <button class="boton-cert activo" onclick="cambiarImagen('CSS.jpg', 'Certificado de CSS', this)">CSS</button>
+                    <button class="boton-cert" onclick="cambiarImagen('MySQL.jpg', 'Certificado de MySQL', this)">MySQL</button>
+                    <button class="boton-cert" onclick="cambiarImagen('git.jpg', 'Certificado de Introducción a GIT', this)">Introducción a GIT</button>
+                    <button class="boton-cert" onclick="cambiarImagen('javascript.jpg', 'Certificado de Introducción a Javascript', this)">Introducción a Javascript</button>
+                    <button class="boton-cert" onclick="cambiarImagen('react.jpg', 'Certificado de React Nivel Básico', this)">React Nivel Básico</button>
+                    <button class="boton-cert" onclick="cambiarImagen('react-firebase.jpg', 'Certificado de React + Firebase', this)">React + Firebase</button>
+                    <button class="boton-cert" onclick="cambiarImagen('csharp2.jpg', 'Certificado de CSHARP Nivel Básico', this)">C# Nivel Básico</button>
+                    <button class="boton-cert" onclick="cambiarImagen('csharp1.jpg', 'Certificado de CSHARP Nivel Intermedio', this)">C# Nivel Intermedio</button>
+                    <button class="boton-cert" onclick="cambiarImagen('flutter.jpg', 'Certificado de FLUTTER', this)">Flutter</button>
+                    <button class="boton-cert" onclick="cambiarImagen('hacking-shell.jpg', 'Certificado de Hacking Shell', this)">Hacking Shell</button>
+                    <button class="boton-cert" onclick="cambiarImagen('hacking-etico.jpg', 'Certificado de Hacking Ético', this)">Hacking Ético</button>
+                </div>
             </div>
-            <nav id="nav">
-                <ul>
-                    <li><a href="#inicio" onclick="seleccionar()">INICIO</a></li>
-                    <li><a href="#sobremi" onclick="seleccionar()">SOBRE MI</a></li>
-                    <li><a href="#skills" onclick="seleccionar()">SKILLS</a></li>
-                    <li><a href="#curriculum" onclick="seleccionar()">CURRICULUM</a></li>
-                    <li><a href="#portfolio" onclick="seleccionar()">PORTFOLIO</a></li>
-                    <li><a href="#contacto" onclick="seleccionar()">CONTACTO</a></li>
-                </ul>
-            </nav>
-            <div class="nav-responsive" onclick="mostrarOcultarMenu()">
-                <i class="fa-solid fa-bars"></i>
+
+            <!-- Sección FreeCodeCamp -->
+            <div class="categoria">
+                <div class="categoria-header" onclick="toggleSeccion('freecode')">
+                    <span>FreeCodeCamp</span>
+                    <span class="badge">2</span>
+                </div>
+                <div id="freecode" class="opciones-lista">
+                    <button class="boton-cert" onclick="cambiarImagen('FCC_FRONT1.jpg', 'Front End Development Libraries con React', this)">Front End Libraries (React)</button>
+                    <a class="link-credencial" target="_blank" href="https://www.freecodecamp.org/certification/fccc6104ba0-aaf7-45a8-a8f4-ea339dad1ad7/front-end-development-libraries">🔗 Verificar Credencial</a>
+                    
+                    <button class="boton-cert" onclick="cambiarImagen('FCC_javascript.jpg', 'Legacy Javascript Algorithms and Data Structure', this)">JavaScript Algorithms</button>
+                    <a class="link-credencial" target="_blank" href="https://www.freecodecamp.org/certification/fccc6104ba0-aaf7-45a8-a8f4-ea339dad1ad7/javascript-algorithms-and-data-structures">🔗 Verificar Credencial</a>
+                </div>
             </div>
-        </header>
+
+            <!-- Sección BIG School -->
+            <div class="categoria">
+                <div class="categoria-header" onclick="toggleSeccion('bigschool')">
+                    <span>BIG School</span>
+                    <span class="badge">1</span>
+                </div>
+                <div id="bigschool" class="opciones-lista">
+                    <button class="boton-cert" onclick="cambiarImagen('Certificado-big.jpg', 'Ciberseguridad y Hacking Ético - BIG School', this)">Ciberseguridad y Hacking Ético</button>
+                </div>
+            </div>
+
+            <!-- Sección Google Activate -->
+            <div class="categoria">
+                <div class="categoria-header" onclick="toggleSeccion('google')">
+                    <span>Google Activate</span>
+                    <span class="badge">2</span>
+                </div>
+                <div id="google" class="opciones-lista">
+                    <button class="boton-cert" onclick="cambiarImagen('google1.jpg', 'Introducción a Programación Web I', this)">Programación Web I</button>
+                    <button class="boton-cert" onclick="cambiarImagen('google2.jpg', 'Introducción a Programación Web II', this)">Programación Web II</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PANEL DERECHO: VISOR DE IMAGEN -->
+        <div class="panel-preview">
+            <!-- Agregué un fallback en onerror por si las imágenes locales no cargan, muestra un texto temporal -->
+            <img 
+                id="visor-img" 
+                class="visor-imagen" 
+                src="CSS.jpg" 
+                alt="Certificado de CSS" 
+                onclick="abrirModal()"
+                onerror="this.src='https://via.placeholder.com/800x600/1e293b/38bdf8?text=Imagen+no+encontrada+localmente'"
+            >
+            <p class="instruccion">👆 Haz clic en la imagen para ampliarla</p>
+        </div>
+
     </div>
 
-    <!-- SECCION INICIO -->
-    <section id="inicio" class="inicio">
-        <div class="contenido-banner">
-            <div class="contenedor-img">
-                <img src="hero.jpg" alt="">
-            </div>
-            <h1>JOSUÉ GONZALEZ</h1>
-            <h2>DESARROLLADOR </h2>
-            <div class="redes">
-                <!-- 
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a> 
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-skype"></i></a>-->
-                <a href="https://gt.linkedin.com/in/josu%C3%A9-osvaldo-gonz%C3%A1lez-salazar-5682091a2" target="_blank" ><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://github.com/15osvaldo"target="_blank" ><i class="fab fa-git"></i></a>
-            </div>
-        </div>
-    </section>
+    <!-- EL MODAL PARA VER EN GRANDE -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption">Certificado de CSS</div>
+    </div>
 
-    <!-- SECCION SOBRE MI -->
-    <section id="sobremi" class="sobremi">
-        <div class="contenido-seccion">
-            <h2>Sobre Mí</h2>
-            <p><span>Hola soy Josué.</span>Me dedico a desarrolloar en tecnologias web como HTML, Javascript Y CSS, soy un apacionado de la tecnologia y cada dia aprendo nuevas cosas sobre desarrollo web.</p>
+    <!-- SCRIPT CORREGIDO Y OPTIMIZADO -->
+    <script>
+        // 1. Lógica del Acordeón (Menú lateral)
+        function toggleSeccion(id) {
+            const listaOpciones = document.querySelectorAll('.opciones-lista');
+            
+            listaOpciones.forEach(seccion => {
+                if (seccion.id === id) {
+                    seccion.classList.toggle('activa');
+                } else {
+                    // Cierra las demás automáticamente para mantenerlo ordenado
+                    seccion.classList.remove('activa');
+                }
+            });
+        }
 
-            <div class="fila">
-                <!-- datos personales -->
-                <div class="col">
-                    <h3>Datos Personales</h3>
-                    <ul>
-                        <!-- 
-                        <li>
-                            <strong>Cumpleaños</strong>
-                            15-01-1993
-                        </li>
-                        -->
-                        <li>
-                            <strong>Teléfono</strong>
-                            +502 46710346
-                        </li>
-                        <li>
-                            <strong>Email</strong>
-                            valdosalazar@gmail.com
-                        </li>
-                        <!-- 
-                        <li>
-                            <strong>Website</strong>
-                            www.example.com
-                        </li>
-                        <li>
-                            <strong>Dirección</strong>
-                            123 San Luis, Argentina
-                        </li>
-                        <li>
-                            <strong>Cargo</strong>
-                            <span>FREELANCE</span>
-                        </li>
-                        -->
-                    </ul>
-                </div>
+        // 2. Lógica para cambiar la imagen del visor
+        function cambiarImagen(rutaImagen, textoAlt, btnElement) {
+            const visor = document.getElementById("visor-img");
+            visor.src = rutaImagen;
+            visor.alt = textoAlt;
 
-                <!-- intereses -->
-                <div class="col">
-                    <h3>Intereses</h3>
-                    <div class="contenedor-intereses">
-                        
-                        <div class="interes">
-                            <i class="fa-solid fa-headphones"></i>
-                            <span>MUSICA</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-plane"></i>
-                            <span>VIAJAR</span>
-                        </div>
-                        <!-- 
-                            <div class="interes">
-                            <i class="fa-solid fa-gamepad"></i>
-                            <span>JUEGOS</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-brands fa-apple"></i>
-                            <span>MAC OS</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-camera"></i>
-                            <span>FOTOS</span>
-                        </div>
-                        -->
-                        <div class="interes">
-                            <i class="fa-solid fa-person-hiking"></i>
-                            <span>DEPORTE</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-book"></i>
-                            <span>LIBROS</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-car"></i>
-                            <span>AUTOS</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-camera"></i>
-                            <span>FOTOS</span>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <button>
-                <i class="fa-solid fa-download" ></i>
-                <a href="Josue Gonzalez.pdf" download style="text-decoration: none; color: white;">Descargar CV</a>
-                <span class="overlay"></span>
-            </button>
-        </div>
-    </section>
+            // Actualiza el estilo del botón activo
+            document.querySelectorAll('.boton-cert').forEach(btn => btn.classList.remove('activo'));
+            if (btnElement) {
+                btnElement.classList.add('activo');
+            }
+        }
 
-    <!-- SECCION SKILLS -->
-    <section class="skills" id="skills">
-        <div class="contenido-seccion">
-            <h2>Skills</h2>
-            <div class="fila">
-                <!-- Technical Skill -->
-                <div class="col">
-                    <h3>Technical Skills</h3>
-                    <div class="skill">
-                        <span>Javascript</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>75%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>HTML & CSS</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>89%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>C#</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>75%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Css</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>81%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Sql server</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>65%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>MySql</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>65%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Professional Skills -->
-                <div class="col">
-                    <h3>Professional Skills</h3>
-                    <div class="skill">
-                        <span>Comunicación</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>80%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Trabajo en Equipo</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>70%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Creatividad</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>99%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Dedicación</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>65%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Scrum</span>
-                        <div class="barra-skill">
-                            <div class="progreso  proyect">
-                                <span>74%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contenido-seccion sobremi1">
-                        <button>
-                            <i class="fa-solid fa-search" ></i> 
-                            <a href="https://15osvaldo.github.io/certificados/" target="_blank"  style="text-decoration: none; color: white; ">Ver certificados!!!</a>
-                            <span class="overlay"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        // 3. Lógica del Modal (Zoom)
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+        const captionText = document.getElementById("caption");
+        const visor = document.getElementById("visor-img");
 
-    <!-- SECCION CURRICULUM -->
-    <section id="curriculum" class="curriculum">
-        <div class="contenido-seccion">
-            <h2>Curriculum</h2>
-            <div class="fila">
-                <div class="col izquierda">
-                    <h3>Educación</h3>
-                    <div class="item izq">
-                        <h4>Ingeniería en sistemas y ciencias de la computación</h4>
-                        <span class="casa">Universidad Mariano Gálvez de Guatemala</span>
-                        <span class="fecha">2017 - Actual</span>
-                        <p>Cuento con pensum cerrado de la carrera de Ingeniería en Sistemas de Información de la Universidad Mariano Gálvez de Guatemala. Mi formación me capacita para crear, diseñar y administrar soluciones informáticas que optimizan el funcionamiento estratégico de las organizaciones.</p>
-                        <div class="conectori">
-                            <div class="circuloi"></div>
-                        </div>
-                    </div>
-                    <div class="item izq">
-                        <h4>Bachillerato con orientacion tecnica en electricidad y soldadura</h4>
-                        <span class="casa">Escuela experimental ocupacional "Villa de los Niños"</span>
-                        <span class="fecha">2010 - 2011</span>
-                        <p>Soy Bachiller Técnico en Electricidad y Soldadura por la Villa de los Niños, una institución educativa que forma parte de la obra social de las Hermanas de María. Tengo conocimientos y habilidades en los fundamentos de la electricidad, la electrónica y la automatización, así como en los procesos de soldadura por arco y oxigás. Puedo realizar instalaciones, reparaciones y mantenimientos eléctricos y de estructuras metálicas, siguiendo las normas de seguridad y calidad.</p>
-                        <div class="conectori">
-                            <div class="circuloi"></div>
-                        </div>
-                    </div>
-                    <!-- 
-                    <div class="item izq">
-                        <h4>Arte y Multimedia</h4>
-                        <span class="casa">Universidad de Oxford</span>
-                        <span class="fecha">2005 - 2008</span>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, cumque repellat, tempora recusandae aliquam nemo esse natus impedit, nostrum temporibus veritatis eaque soluta aperiam id repudiandae fugiat deserunt! Explicabo, veritatis?</p>
-                        <div class="conectori">
-                            <div class="circuloi"></div>
-                        </div>
-                    </div>-->
-                </div>
+        function abrirModal() {
+            modal.classList.add("mostrar");
+            modalImg.src = visor.src;
+            captionText.innerHTML = visor.alt;
+        }
 
-                <div class="col derecha">
-                    <h3>Experiencia de trabajo</h3>
-                     <div class="item der">
-                        <h4>Analista de Soporte de aplicaciones</h4>
-                        <span class="casa">Banco CHN</span>
-                        <span class="fecha">Febrero 2025 - Actual</span>
-                        <p>Proporciono soporte técnico especializado para aplicaciones críticas, garantizando su alta disponibilidad y continuidad operativa. Mis responsabilidades incluyen el diagnóstico y la resolución de incidentes, abarcando desde la detección inicial hasta la implementación de soluciones en coordinación estrecha con el equipo de desarrollo. Además, me encargo de la gestión integral de incidentes y requerimientos, asegurando una atención oportuna, un seguimiento adecuado y un cierre efectivo de cada caso.</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    <div class="item der">
-                        <h4>Desarrollador Junior</h4>
-                        <span class="casa">DATALOGICS</span>
-                        <span class="fecha">Octubre 2022 - Enero 2025</span>
-                        <p>Soy desarrollador junior de software en DATALOGICS system, una empresa que brinda soluciones tecnológicas innovadoras y personalizadas. Actualmente, estoy asignado como outsourcing al banco G&T, una de las instituciones financieras más importantes de Guatemala, donde apoyo el desarrollo y mantenimiento de sus aplicaciones informáticas.</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    <div class="item der">
-                        <h4>Encargado de laboratorio de control de calidad</h4>
-                        <span class="casa">Tecnología textil avanzada</span>
-                        <span class="fecha">Diciembre 2011 - Enero 2022</span>
-                        <p>Fui Encargado de laboratorio de control de calidad en Tecnología Textil Avanzada, una empresa que brinda soluciones ecológicas e innovadoras en el sector textil. Mi función era supervisar y garantizar la calidad de los productos elaborados a partir de botellas de plástico PET recicladas, siguiendo los estándares y normas establecidos. También me encargaba de coordinar y capacitar al personal del laboratorio, así como de recibir y aplicar las recomendaciones de los asesores técnicos.</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    <!-- 
-                    <div class="item der">
-                        <h4>Front Developer</h4>
-                        <span class="casa">Nombre de Compañía</span>
-                        <span class="fecha">2005 - 2008</span>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, cumque repellat, tempora recusandae aliquam nemo esse natus impedit, nostrum temporibus veritatis eaque soluta aperiam id repudiandae fugiat deserunt! Explicabo, veritatis?</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    -->
-                </div>
-            </div>
-        </div>
-    </section>
+        function cerrarModal() {
+            modal.classList.remove("mostrar");
+        }
 
-    <!-- SECCION PORTFOLIO -->
-    <section id="portfolio" class="portfolio">
-        <div class="contenido-seccion">
-            <h2>PORTFOLIO</h2>
-            <div class="galeria">
-                <div class="proyecto">
-                    <a href="https://15osvaldo.github.io/todo"target="_blank" > <img src="todo.gif" alt="">
-                    <div class="overlay">
-                        <h3>ToDO List</h3>
-                        <p>Realizado con Javascript, CSS y HTML</p>
-                    </div></a>
-                </div>
-                <div class="proyecto calculadora" >
-                    <a href="https://15osvaldo.github.io/CalculadoraHtml-Css-Js" target="_blank" >            
-                    <img src="calculadora.gif" alt="">
-                    <div class="overlay">
-                        <h3>Calculadora Basica usando JAVASCRIPT </h3>
-                        <p>La función principal de este proyecto es poder simular una culculadora</p>
-                    </div> </a>
-                </div>
-                <div class="proyecto Juego" >
-                    <a href="https://15osvaldo.github.io/juego/ "target="_blank" >
-                    <img src="game.gif" alt="">
-                    <div class="overlay">
-                        <h3>Juego usando Javascript, CSS y HTML</h3>
-                        <p>La función principal de este proyecto es poder mover una nave protagonista y varias naves enemigas</p>
-                    </div></a>
-                </div>
-                <div class="proyecto">
-                    <a href="https://15osvaldo.github.io/memoria_Game " target="_blank" >
-                    <img src="memoria.gif" alt="">
-                    <div class="overlay">
-                        <h3>MEMORY GAME</h3>
-                        <p>La función principal de este proyecto es buscar todas las figuras pares</p>
-                    </div></a>
-                </div>
-                <div class="proyecto">
-                    <a href="https://github.com/15osvaldo/CalculadoraCsharp.git" target="_blank" >
-                    <img src="c-calculadora.gif" alt="">
-                    <div class="overlay">
-                        <h3>Calculadora Basica en C#</h3>
-                        <p>  La funcion de este proyecto es poder usar una culculadora basica hecha en Scharp que es especialmente para escritorio.</p>
-                    </div></a>
-                </div> 
-               <div class="proyecto">
-                    <a href="https://15osvaldo.github.io/certificados/" target="_blank">
-                    <img src="certificados.gif" alt="">
-                    <div class="overlay">
-                        <h3>certificados!</h3>
-                        <p>Se muestran el juego de certificados obtenidos, este proyecto se realizo con HTML, JAVASCRIPT y CSS.</p>
-                    </div></a>
-                </div> 
-            </div>
-        </div>
-    </section>
+        // Cerrar modal al hacer clic fuera de la imagen
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                cerrarModal();
+            }
+        });
 
-    <!-- SECCION CONTACTO -->
-    <section id="contacto" class="contacto">
-        <div class="contenido-seccion">
-            <h2>CONTACTO</h2>
-            <div class="fila">
-                <!-- Formulario 
-                <div class="col">
-                    <form action="mailto:[valdosalazar@gmail.com]" method="post" enctype="text/plain"> 
-                        <input type="text" placeholder="Tú Nombre">
-                        <input type="text" placeholder="Número telefónico">
-                        <input type="text" placeholder="Dirección de correo">
-                        <input type="text" placeholder="Tema">
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
-                        <button>
-                            Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
-                            <span class="overlay"></span>
-                        </button>
-
-                        <input type="text" name="name" placeholder="Nombre">
-                        <input type="text" name="email" placeholder="Correo">
-                        <input type="submit" value="Enviar">
-                    
-                      </form>
-                      
-                   
-                    
-                    
-                    
-                </div>-->
-                <!-- Mapa -->
-                <div class=""><!-- Mapa
-                    <img src="img/ubicacion.png" alt=""> -->
-                    <div class="info">
-                        <ul>
-                            <li>
-                                <i class="fa-solid fa-location-dot"></i>
-                                Guatemala, Ciudad.
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-mobile-screen"></i>
-                                Llamame: +502 - 46710346 
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-envelope"></i>
-                                Email: valdosalazar@gmail.com
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- footer -->
-    <footer>
-        <a href="#inicio" class="arriba">
-            <i class="fa-solid fa-angles-up"></i>
-        </a>
-        <div class="redes">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-skype"></i></a>
-            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#"><i class="fa-solid fa-rss"></i></a>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+        // Cerrar modal con la tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape" && modal.classList.contains("mostrar")) {
+                cerrarModal();
+            }
+        });
+    </script>
 </body>
 </html>
